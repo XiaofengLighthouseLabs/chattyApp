@@ -36,7 +36,7 @@ onlineUser=(onlineUser)=>{
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
-wss.on('connection', (ws) => {
+  wss.on('connection', (ws) => {
   console.log('Client connected');
 // At this point in time wss.clients is a Set that includes
 // the ws objects of all clients, including the one who just connected.
@@ -44,12 +44,13 @@ wss.on('connection', (ws) => {
 // Because it is a Set, you cannot use .length on it.
   onlineUser(onlineUser);
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
-  ws.on('close', () =>{console.log('Client disconnected')
-    onlineUser(onlineUser);
-    });
+  ws.on('close', () =>{
+    console.log('Client disconnected')
   // At this point in time wss.clients no longer contains the ws object
   // of the client who disconnected
-   onlineUser(onlineUser);
+    onlineUser(onlineUser);
+    });
+
 });
 
 

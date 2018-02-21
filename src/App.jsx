@@ -56,7 +56,7 @@ class App extends Component {
     //   const messages = this.state.messages.concat(newMessage);
     //   this.setState({messages:messages})
     // },3000);
-  }
+  };
 
 
   addNewMessage=(content)=>{

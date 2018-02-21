@@ -19,9 +19,9 @@ class ChartBar extends Component {
         <input className="chatbar-message" placeholder="Type a message and hit ENTER" value={this.state.content} onChange={this._changeNewMessage} onKeyPress={this.notifyMessage}/>
       </footer>
     );
-  }
+  };
 
-  _changeNewMessage=(event)=>{this.setState({content:event.target.value})}
+  _changeNewMessage=(event)=>{this.setState({content:event.target.value})};
 
 
 
@@ -29,13 +29,13 @@ class ChartBar extends Component {
     if(event.key==='Enter'){
           this.props.onNewMessage(this.state.content);
           this.state.content = "";
-    }
-  }
+    };
+  };
 
   notifyUserName=(event)=>{
     this.props.onNewUsername(event.target.value)
-  }
+  };
 
 
-}
+};
 export default ChartBar;
