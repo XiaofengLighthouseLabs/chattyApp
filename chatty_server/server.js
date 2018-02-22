@@ -18,7 +18,7 @@ const server = express()
 const wss = new SocketServer({ server });
 
  wss.broadcast = (newMessage) => {
-  console.log("broadcasted");
+  console.log("broadcasted"+JSON.stringify(newMessage));
     wss.clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify(newMessage));
@@ -61,6 +61,7 @@ wss.on('connection',  function connection(ws){
 
     ws.color = color[Math.floor(Math.random()*color.length)];
     console.log(ws.color);
+
     const newMessage = JSON.parse(msgStr);
     console.log('received: ', newMessage);
     switch(newMessage.type){
@@ -69,6 +70,7 @@ wss.on('connection',  function connection(ws){
         newMessage.id = uuidv4();
         newMessage.color = ws.color;
         wss.broadcast(newMessage);
+        console.log(newMessage);
       break;
 
       case"postNotification":

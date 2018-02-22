@@ -4,9 +4,7 @@ import MessageList from './MessageList.jsx';
 
 const uuidv4 = require('uuid/v4');
 
-
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -27,27 +25,29 @@ class App extends Component {
     }
 
     this.socket.onmessage = (event) => {
-      console.log(event.data);
+      console.log('received:' + event.data);
       const newMessage = JSON.parse(event.data);
-      console.log(newMessage)
+      console.log(newMessage);
         switch(newMessage.type){
+
           case"incommingMessage":
             const messages = this.state.messages.concat(newMessage);
-            this.setState({messages:messages})
+            this.setState({messages:messages});
             break;
 
           case"incommingNotification":
             const notification = this.state.messages.concat(newMessage);
-            this.setState({messages:notification})
+            this.setState({messages:notification});
           break;
+
           case"countOnlineUser":
-            this.setState({onlineUser:newMessage.onlineUser})
+            this.setState({onlineUser:newMessage.onlineUser});
             break;
 
         throw new Error("Unknown event type " + data.type);
 
 
-        }
+        };
       }
 
     // setTimeout(()=>{
@@ -58,8 +58,12 @@ class App extends Component {
     // },3000);
   };
 
+  componentWillUnmount(){
+    this.socket.close();
+  }
 
-  addNewMessage=(content)=>{
+
+  addNewMessage = (content) => {
     const newMessage = {
       type:"postMessage",
       username:this.state.currentUser.name,
@@ -70,7 +74,7 @@ class App extends Component {
     this.socket.send(JSON.stringify(newMessage));
   };
 
-  setCurrentUser=(newUsername)=>{
+  setCurrentUser=(newUsername) => {
     if(newUsername !== this.state.currentUser.name){
        const notification = {
         type:"postNotification",
@@ -81,9 +85,6 @@ class App extends Component {
     };
   };
 
-  postNotification=()=>{
-
-  }
 
   render() {
     console.log('rendering<App/>')

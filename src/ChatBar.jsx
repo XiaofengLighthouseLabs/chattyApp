@@ -33,7 +33,7 @@ class ChartBar extends Component {
   };
 
   notifyUserName=(event)=>{
-    this.props.onNewUsername(event.target.value)
+    this.props.onNewUsername(event.target.value);
   };
 
 
